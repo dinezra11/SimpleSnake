@@ -1,16 +1,20 @@
+from linkedlist import LinkedList, Node
 import pygame
 
 
 class Player:
+    def __init__(self, position: tuple, color=(0, 0, 0), size=5, speed=5):
+        self.body = LinkedList()
+        self.body.add(position)
+        self.color = color
+        self.size = size
+        self.speed = speed
+        self.direction = (speed, 0) # starting movement is set to the RIGHT
 
-    def __init__(self, position: tuple):
-        self.posX, self.posY = position
-        self.moveX = self.moveY = 0
-        self.snakeImg = pygame.image.load("")
+    """def update(self):
+        node = self.body.head
+        while node.next is not Node:"""
 
-    def update(self):
-        self.posX += self.moveX
-        self.posY += self.moveY
 
     def draw(self, display: pygame.Surface):
-        display.blit(display, snakeImg, (self.posX, self.posY))
+        pygame.draw.circle(display, self.color, self.body.head.data, self.size)
