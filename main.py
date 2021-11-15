@@ -16,15 +16,30 @@ isGameOn = True
 # Initialize player's Snake
 player = Player((WIN_SIZE[0]/2, WIN_SIZE[1]/2), COLOR)
 
-while isGameOn:
+
+def updateGame():
+    global isGameOn
+
+    # Get User's Input
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             isGameOn = False
 
+    # Update objects
+    #player.update()
+
+
+def drawGame():
     gameDisplay.fill(BACKGROUND_COLOR)
     player.draw(gameDisplay)
-
     pygame.display.update()
+
+
+""" Game's Loop """
+while isGameOn:
+
+    updateGame()
+    drawGame()
     clock.tick(30)
 
 pygame.quit()

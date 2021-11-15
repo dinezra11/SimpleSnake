@@ -1,4 +1,4 @@
-from linkedlist import LinkedList, Node
+from linkedList import LinkedList, Node
 import pygame
 
 
@@ -11,9 +11,10 @@ class Player:
         self.speed = speed
         self.direction = (speed, 0) # starting movement is set to the RIGHT
 
-    """def update(self):
+    def update(self):
         node = self.body.head
-        while node.next is not Node:"""
+        while node.next is not Node:
+            node.data = node.next.data
 
 
     def draw(self, display: pygame.Surface):
