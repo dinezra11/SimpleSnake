@@ -7,7 +7,8 @@ WIN_SIZE = (800, 600)
 PLAYER_SIZE = 12                            # Default player's size (the game will scale according to the size)
 PLAYER_SPEED = 7                            # Default player's speed
 BACKGROUND_COLOR = (255, 255, 255)          # White
-COLOR = (142, 157, 62)                      # Grey
+COLOR1 = (142, 157, 62)                     # Grey
+COLOR2 = (100, 45, 200)                    # Grey
 
 # Initialize game's window
 pygame.init()
@@ -17,10 +18,12 @@ pygame.display.set_caption("Snake Race, by Din Ezra")
 isGameOn = True
 
 # Initialize player's Snake
-player = Player((WIN_SIZE[0]/2, WIN_SIZE[1]/2), COLOR, PLAYER_SIZE, PLAYER_SPEED)
+player = (
+    Player(0, (WIN_SIZE[0]*0.75, WIN_SIZE[1]/2), COLOR1, PLAYER_SIZE, PLAYER_SPEED),
+    Player(1, (WIN_SIZE[0]*0.25, WIN_SIZE[1]/2), COLOR2, PLAYER_SIZE, PLAYER_SPEED))
 
 # Initialize collectables
-coin = Collectable(WIN_SIZE, (player.body.head, player.body.head), PLAYER_SIZE // 2)
+coin = Collectable(WIN_SIZE, (player[0].body.head, player[1].body.head), PLAYER_SIZE // 2)
 
 
 def collisionDetection(pos1, size1, pos2, size2):
@@ -42,22 +45,27 @@ def updateGame():
         if event.type == pygame.QUIT:
             isGameOn = False
         if event.type == pygame.KEYDOWN:
-            player.changeDirection(event.key)
+            for p in player:
+                p.changeDirection(event.key)
 
-    # Collision Detection:
-    if collisionDetection(player.body.head.data, player.size, coin.position, coin.size):
-        player.body.addToEnd(coin.position)
-        player.score += 1
-        coin = Collectable(WIN_SIZE, (player.body.head, player.body.head), PLAYER_SIZE // 2)
+    for p in player:
+        # Collision Detection:
+        if collisionDetection(p.body.head.data, p.size, coin.position, coin.size):
+            p.body.addToEnd(coin.position)
+            p.score += 1
+            coin = Collectable(WIN_SIZE, (player[0].body.head, player[1].body.head), PLAYER_SIZE // 2)
 
-    # Update objects:
-    player.update()
+        # Update the Player's object:
+        p.update()
+
+    # Update the collectable object:
     coin.update()
 
 
 def drawGame():
     gameDisplay.fill(BACKGROUND_COLOR)
-    player.draw(gameDisplay)
+    for p in player:
+        p.draw(gameDisplay)
     coin.draw(gameDisplay)
     pygame.display.update()
 

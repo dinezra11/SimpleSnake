@@ -3,7 +3,8 @@ import pygame
 
 
 class Player:
-    def __init__(self, position: tuple, color=(0, 0, 0), size=10, speed=7):
+    def __init__(self, playerId: int, position: tuple, color=(0, 0, 0), size=10, speed=7):
+        self.id = playerId
         self.body = LinkedList()
         self.body.addToFront(position)
         self.color = color
@@ -14,14 +15,24 @@ class Player:
 
     def changeDirection(self, key):
         """ Change the direction of the snake. Key = the pygame's constant that indicates the key pressed. """
-        if key == pygame.K_UP and self.direction[1] <= 0:
-            self.direction = (0, -self.speed)
-        elif key == pygame.K_DOWN and self.direction[1] >= 0:
-            self.direction = (0, self.speed)
-        elif key == pygame.K_LEFT and self.direction[0] <= 0:
-            self.direction = (-self.speed, 0)
-        elif key == pygame.K_RIGHT and self.direction[0] >= 0:
-            self.direction = (self.speed, 0)
+        if self.id == 0:
+            if key == pygame.K_w and self.direction[1] <= 0:
+                self.direction = (0, -self.speed)
+            elif key == pygame.K_s and self.direction[1] >= 0:
+                self.direction = (0, self.speed)
+            elif key == pygame.K_a and self.direction[0] <= 0:
+                self.direction = (-self.speed, 0)
+            elif key == pygame.K_d and self.direction[0] >= 0:
+                self.direction = (self.speed, 0)
+        else:
+            if key == pygame.K_UP and self.direction[1] <= 0:
+                self.direction = (0, -self.speed)
+            elif key == pygame.K_DOWN and self.direction[1] >= 0:
+                self.direction = (0, self.speed)
+            elif key == pygame.K_LEFT and self.direction[0] <= 0:
+                self.direction = (-self.speed, 0)
+            elif key == pygame.K_RIGHT and self.direction[0] >= 0:
+                self.direction = (self.speed, 0)
 
     def update(self):
         node = self.body.tail
