@@ -1,15 +1,26 @@
-from linkedList import LinkedList, Node
+from linkedList import LinkedList
 import pygame
 
 
 class Player:
-    def __init__(self, position: tuple, color=(0, 0, 0), size=5, speed=5):
+    def __init__(self, position: tuple, color=(0, 0, 0), size=7, speed=7):
         self.body = LinkedList()
         self.body.addToFront(position)
         self.color = color
         self.size = size
         self.speed = speed
         self.direction = (speed, 0) # starting movement is set to the RIGHT
+
+    def changeDirection(self, key):
+        """ Change the direction of the snake. Key = the pygame's constant that indicates the key pressed. """
+        if key == pygame.K_UP:
+            self.direction = (0, -self.speed)
+        elif key == pygame.K_DOWN:
+            self.direction = (0, self.speed)
+        elif key == pygame.K_LEFT:
+            self.direction = (-self.speed, 0)
+        elif key == pygame.K_RIGHT:
+            self.direction = (self.speed, 0)
 
     def update(self):
         node = self.body.tail

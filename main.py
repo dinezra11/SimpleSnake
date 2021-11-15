@@ -24,6 +24,8 @@ def updateGame():
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             isGameOn = False
+        if event.type == pygame.KEYDOWN:
+            player.changeDirection(event.key)
 
     # Update objects
     player.update()
