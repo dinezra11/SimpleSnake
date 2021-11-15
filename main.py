@@ -70,7 +70,6 @@ def updateGame():
                 p.body.addToEnd(coin[i].position)
                 p.score += 1
                 coin.pop(i)
-                print(p.score)
                 break
 
 
@@ -88,6 +87,8 @@ while isGameOn:
     updateGame()
     drawGame()
     clock.tick(30)
+
+# Game end! Show results:
 
 pygame.quit()
 quit()
