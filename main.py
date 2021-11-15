@@ -26,7 +26,7 @@ def updateGame():
             isGameOn = False
 
     # Update objects
-    #player.update()
+    player.update()
 
 
 def drawGame():
