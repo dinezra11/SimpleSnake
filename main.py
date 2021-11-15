@@ -10,7 +10,7 @@ COLOR = (142, 157, 62)                      # Grey
 pygame.init()
 clock = pygame.time.Clock()
 gameDisplay = pygame.display.set_mode(WIN_SIZE)
-pygame.display.set_caption("Simple Snake, by Din Ezra")
+pygame.display.set_caption("Snake Race, by Din Ezra")
 isGameOn = True
 
 # Initialize player's Snake
