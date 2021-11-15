@@ -72,7 +72,6 @@ def drawGame():
 
 """ Game's Loop """
 while isGameOn:
-
     updateGame()
     drawGame()
     clock.tick(30)
