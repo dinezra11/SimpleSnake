@@ -37,7 +37,7 @@ def collisionDetection(pos1, size1, pos2, size2):
     """ Detect a collision between 2 objects.
     parameters: position (tuple) and size (int) of 2 objects.
     """
-    for i in range(2):
+    for i in range(len(pos1)):
         if pos1[i] > pos2[i] + size2 or pos1[i] + size1 < pos2[i]:
             return False
 
@@ -70,6 +70,7 @@ def updateGame():
                 p.body.addToEnd(coin[i].position)
                 p.score += 1
                 coin.pop(i)
+                print(p.score)
                 break
 
 
